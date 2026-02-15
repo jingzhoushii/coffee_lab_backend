@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: coffee-lab-api
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn coffee_lab_backend.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: DJANGO_SETTINGS_MODULE
+        value: coffee_lab_backend.settings
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "false"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: coffee-lab-db
+          property: connectionString
+      - key: CORS_ALLOWED_ORIGINS
+        value: "https://coffee-lab-lac.vercel.app"
+
+databases:
+  - name: coffee-lab-db
+    databaseName: coffee_lab
+    user: coffee_lab_user
+
+version: "1"
