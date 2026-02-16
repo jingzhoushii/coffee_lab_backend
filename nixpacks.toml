@@ -14,3 +14,4 @@ cmd = "gunicorn coffee_lab_backend.wsgi:application --bind 0.0.0.0:$PORT"
 [variables]
 DJANGO_SETTINGS_MODULE = "coffee_lab_backend.settings"
 DEBUG = "false"
+ALLOWED_HOSTS = "*.up.railway.app,localhost,127.0.0.1"
