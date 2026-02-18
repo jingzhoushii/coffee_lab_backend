@@ -79,14 +79,17 @@ WSGI_APPLICATION = 'coffee_lab_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# Database configuration
+# Railway provides DATABASE_URL for PostgreSQL, fallback to SQLite for local dev
 DATABASE_URL = os.getenv('DATABASE_URL', '')
 
 if DATABASE_URL:
     import dj_database_url
     DATABASES = {
-        'default': dj_database_url.parse(DATABASE_URL)
+        'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
     }
 else:
+    # Use SQLite when no DATABASE_URL is provided
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
