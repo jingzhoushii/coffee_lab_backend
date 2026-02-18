@@ -24,6 +24,9 @@ DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
+# 允许 Railway 内部网络（健康检查使用）
+ALLOWED_HOSTS.extend(['.railway.internal', '.up.railway.app'])
+
 
 # Application definition
 
