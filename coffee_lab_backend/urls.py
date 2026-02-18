@@ -8,7 +8,11 @@ from django.conf.urls.static import static
 from django.http import JsonResponse
 
 def health_check(request):
-    return JsonResponse({"status": "ok", "service": "coffee-lab-backend"})
+    """Simple health check that doesn't require database"""
+    return JsonResponse({
+        "status": "ok",
+        "service": "coffee-lab-backend"
+    })
 
 urlpatterns = [
     path('admin/', admin.site.urls),
