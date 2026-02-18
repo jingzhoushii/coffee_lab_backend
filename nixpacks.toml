@@ -1,15 +1,14 @@
 [phases.build]
 cmds = [
   "pip install -r requirements.txt",
-  "python manage.py collectstatic --no-input",
-  "python manage.py migrate"
+  "python manage.py collectstatic --no-input"
 ]
 
 [phases.setup]
 nixPkgs = ["python311", "gcc"]
 
 [start]
-cmd = "gunicorn coffee_lab_backend.wsgi:application --bind 0.0.0.0:$PORT"
+cmd = "bash start.sh"
 
 [variables]
 DJANGO_SETTINGS_MODULE = "coffee_lab_backend.settings"
